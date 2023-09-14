@@ -3,10 +3,14 @@
 version: '3'
 
 tasks:
+  run:
+    dir: '{{.USER_WORKING_DIR}}'
+    cmds: 
+      - ./out.exe
+
   build:
     dir: '{{.USER_WORKING_DIR}}'
     sources: ["**/*.cpp"]
     cmds:
       - g++ -Wall -o out.exe main.cpp
-      - echo "✅"
 

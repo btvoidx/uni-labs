@@ -5,7 +5,7 @@
 using namespace std;
 
 template <typename T> void ask(string q, T *v) {
-  while ((cout << q) && !(cin >> *v)) {
+  while ((cout << q) && (!(cin >> *v) || cin.peek() != '\n')) {
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
   };

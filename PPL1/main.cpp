@@ -20,9 +20,9 @@ void run() {
     ask("input matrix height: ", &h);
 
   // создаём матрицу
-  int **mat = new int *[h];
+  double **mat = new double *[h];
   for (int hi = 0; hi < h; hi++)
-    mat[hi] = new int[w];
+    mat[hi] = new double[w];
 
   // наполняем матрицу
   for (int hi = 0; hi < h; hi++)
@@ -32,6 +32,8 @@ void run() {
 
   // показываем изначальную матрицу
   cout << "input matrix:\n";
+  // min(x, 6) используется чтобы не выводить
+  // слишком большие матрицы целиком
   for (int hi = 0; hi < min(h, 6); hi++) {
     for (int wi = 0; wi < min(w, 6); wi++) {
       cout << mat[hi][wi] << "\t";

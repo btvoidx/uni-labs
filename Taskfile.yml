@@ -3,6 +3,11 @@
 version: '3'
 
 tasks:
+  test:
+    dir: '{{.USER_WORKING_DIR}}'
+    cmds:
+      - echo "tests are not implemented yet!"
+  
   run:
     dir: '{{.USER_WORKING_DIR}}'
     cmds: 

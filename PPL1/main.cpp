@@ -1,6 +1,6 @@
 #include <iostream>
 #include <limits>
-#include <string>
+#include <string>
 
 using namespace std;
 
@@ -15,9 +15,9 @@ void run() {
   // размеры матрицы
   int w = 0, h = 0;
   while (w < 1)
-    ask("input matrix width: ", &w);
+    ask("input matrix width (a positive number): ", &w);
   while (h < 1)
-    ask("input matrix height: ", &h);
+    ask("input matrix height (a positive number): ", &h);
 
   // создаём матрицу
   double **mat = new double *[h];
@@ -41,8 +41,8 @@ void run() {
     cout << "\n";
   }
 
-  // показываем результирующию матрицу
-  cout << "output matrix:\n";
+  // показываем транспонированную матрицу
+  cout << "transposed matrix:\n";
   for (int wi = 0; wi < min(w, 6); wi++) {
     for (int hi = 0; hi < min(h, 6); hi++) {
       cout << mat[hi][wi] << "\t";
@@ -57,12 +57,12 @@ void run() {
 }
 
 int main() {
-  string shouldRepeat;
+  char shouldRepeat;
   do {
     run();
 
-    cout << "again? (y/n): ";
+    cout << "again? (y / anything else quits): ";
     cin >> shouldRepeat;
-  } while (shouldRepeat == "y" || shouldRepeat == "Y");
+  } while (shouldRepeat == 'y' || shouldRepeat == 'Y');
   return 0;
 }

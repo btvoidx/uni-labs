@@ -50,12 +50,12 @@ void run() {
 }
 
 int main() {
-  string shouldRepeat;
+  char shouldRepeat;
   do {
     run();
 
-    cout << "again? (y/n): ";
+    cout << "again? (y / anything else quits): ";
     cin >> shouldRepeat;
-  } while (shouldRepeat == "y" || shouldRepeat == "Y");
+  } while (shouldRepeat == 'y' || shouldRepeat == 'Y');
   return 0;
 }

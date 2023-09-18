@@ -5,18 +5,22 @@ using namespace std;
 
 void readTime(string prompt, int *hours, int *minutes, int *seconds) {
   while (
+      // выполняем цикл, пока:
+      // введено не ровно три числа через ':'
+      // ИЛИ одно из них не входит в интервал 0 <= x <= 59
       ((cout << prompt) && scanf_s("%d:%d:%d", hours, minutes, seconds) != 3) ||
       cin.peek() != '\n' ||
       (59 < *hours || *hours < 0 || 59 < *minutes || *minutes < 0 ||
        59 < *seconds || *seconds < 0)) {
+    // очищаем остатки ввода и пишем ошибку
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     cout << "wrong time format: expected HH:MM:SS\n";
-    cout << prompt;
   }
 }
 
 void run() {
+  // запрашиваем у пользователя входные данные: время начало и конца процесса
   int startHours, startMinutes, startSeconds;
   int endHours, endMinutes, endSeconds;
   readTime("enter start time: ", &startHours, &startMinutes, &startSeconds);
@@ -26,14 +30,18 @@ void run() {
   int startTime = startHours * 3600 + startMinutes * 60 + startSeconds;
   int endTime = endHours * 3600 + endMinutes * 60 + endSeconds;
 
+  // если время завершения окажется меньше времени начала,
+  // можем предположить, что задача заняла несколько дней,
+  // ведь машину времени не изобрели
   if (startTime > endTime) {
     cout << "task ended before starting: assuming task took multiple days\n";
     while (days <= 0) {
-      cout << "enter day count (>0): ";
+      cout << "enter day count (a positive integer): ";
       cin >> days;
     }
   }
 
+  // подсчитываем общее потраченное время в секундах
   int totalTimeSpent = endTime - startTime + days * 24 * 3600;
 
   printf_s("task took %d second(s)", totalTimeSpent);
@@ -41,6 +49,7 @@ void run() {
     printf_s(" or about %d minute(s)", totalTimeSpent / 60);
   cout << "\n";
 
+  // переводим секунды в часы и минуты для наиболее точного вывода
   int totalHoursSpent = totalTimeSpent / 3600;
   int totalMinutesSpent = (totalTimeSpent - totalHoursSpent * 3600) / 60;
   int totalSecondsSpent =
@@ -52,6 +61,9 @@ void run() {
 int main() {
   string shouldRepeat;
   do {
+    // настоящий "main" программы.
+    // он вынесен, чтобы отделить основную логику программы
+    // от вторичной логики перезапуска.
     run();
 
     cout << "again? (y / anything else quits): ";

@@ -6,7 +6,7 @@ tasks:
   test:
     dir: '{{.USER_WORKING_DIR}}'
     cmds:
-      - echo "tests are not implemented yet!"
+      - echo "tests are not implemented!"
   
   run:
     dir: '{{.USER_WORKING_DIR}}'
@@ -15,7 +15,6 @@ tasks:
 
   build:
     dir: '{{.USER_WORKING_DIR}}'
-    sources: ["**/*.cpp"]
+    sources: ["**/*.cpp", "**/*.go"]
     cmds:
       - g++ -Wall -o out.exe main.cpp
-

@@ -46,7 +46,7 @@ func readInput() DynamicUint {
 
 		v, err := ParseDynamicUint(s)
 		if err != nil {
-			fmt.Println("это число не подходит")
+			fmt.Println("этот ввод не подходит")
 			continue
 		}
 
@@ -58,6 +58,10 @@ type DynamicUint []byte
 
 func ParseDynamicUint(s string) (DynamicUint, error) {
 	v := make(DynamicUint, len(s))
+	if len(s) == 0 {
+		return nil, fmt.Errorf("not a number")
+	}
+
 	for i, b := range []byte(s) {
 		b -= '0'
 		if b > 9 {

@@ -8,7 +8,6 @@ import (
 )
 
 func run() {
-	fmt.Println("эта программа решает проблему 196")
 	num := readInput()
 	i := 0
 
@@ -135,6 +134,7 @@ func (a DynamicUint) Add(b DynamicUint) DynamicUint {
 }
 
 func main() {
+	fmt.Println("эта программа решает проблему 196")
 	r := bufio.NewReader(os.Stdin)
 
 	for {

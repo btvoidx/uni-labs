@@ -4,10 +4,21 @@
 
 using namespace std;
 
-template <typename T> void ask(string q, T *v) {
-  while ((cout << q) && (!(cin >> *v) || cin.peek() != '\n')) {
+void askInt(string q, int *v) {
+  cout << q;
+  while (!(cin >> *v) || cin.peek() != '\n') {
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << q;
+  };
+}
+
+void askString(string q, string *v) {
+  cout << q;
+  while (!(cin >> *v) || cin.peek() != '\n') {
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << q;
   };
 }
 
@@ -15,39 +26,44 @@ void run() {
   // размеры матрицы
   int w = 0, h = 0;
   while (w < 1)
-    ask("input matrix width (a positive number): ", &w);
+    askInt("input matrix width (a positive number): ", &w);
   while (h < 1)
-    ask("input matrix height (a positive number): ", &h);
+    askInt("input matrix height (a positive number): ", &h);
 
   // создаём матрицу
-  double **mat = new double *[h];
+  // используется тип string вместо int или double
+  // чтобы разрешить ввод конструкций типа "x + y"
+  string **mat = new string *[h];
   for (int hi = 0; hi < h; hi++)
-    mat[hi] = new double[w];
-
+    mat[hi] = new string[w];
+  
+  cin.ignore(numeric_limits<streamsize>::max(), '\n');
+  
   // наполняем матрицу
   for (int hi = 0; hi < h; hi++)
-    for (int wi = 0; wi < w; wi++)
-      ask("value at " + to_string(hi + 1) + "." + to_string(wi + 1) + ": ",
-          &mat[hi][wi]);
+    for (int wi = 0; wi < w; wi++) {
+      printf_s("value at %d.%d: ", hi+1, wi+1);
+      getline(cin, mat[hi][wi]);
+    }
 
   // показываем изначальную матрицу
-  cout << "input matrix:\n";
+  cout << "\ninput matrix:\n  ";
   // min(x, 6) используется чтобы не выводить
   // слишком большие матрицы целиком
   for (int hi = 0; hi < min(h, 6); hi++) {
     for (int wi = 0; wi < min(w, 6); wi++) {
       cout << mat[hi][wi] << "\t";
     }
-    cout << "\n";
+    cout << "\n  ";
   }
 
   // показываем транспонированную матрицу
-  cout << "transposed matrix:\n";
+  cout << "\ntransposed matrix:\n  ";
   for (int wi = 0; wi < min(w, 6); wi++) {
     for (int hi = 0; hi < min(h, 6); hi++) {
       cout << mat[hi][wi] << "\t";
     }
-    cout << "\n";
+    cout << "\n  ";
   }
 
   // удаляем матрицу из памяти
@@ -61,7 +77,7 @@ int main() {
   do {
     run();
 
-    cout << "again? (y / anything else quits): ";
+    cout << "\nagain? (y / anything else quits): ";
     cin >> shouldRepeat;
   } while (shouldRepeat == "y" || shouldRepeat == "Y");
   return 0;

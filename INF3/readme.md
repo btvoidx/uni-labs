@@ -12,4 +12,3 @@
 
 # Доп. источники
 https://byjus.com/maths/greatest-common-divisor/
-https://stackoverflow.com/questions/21854191/generating-prime-numbers-in-go

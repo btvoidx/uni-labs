@@ -147,7 +147,7 @@ func main() {
 		fmt.Print("снова? ('y'; любой иной ввод завершит программу): ")
 		s, err := r.ReadString('\n')
 		s = strings.TrimSpace(s)
-		if err != nil || !(s == "y" || s == "у") {
+		if err != nil || (s != "y" && s != "у") {
 			//                         это русская у
 			return
 		}

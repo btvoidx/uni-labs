@@ -1,34 +1,40 @@
 #include <iostream>
-#include <limits>
 #include <string>
 
 using namespace std;
 
-void askInt(string q, int *v) {
-  cout << q;
-  while (!(cin >> *v) || cin.peek() != '\n') {
+int askInt(string msg) {
+  cout << msg;
+
+  int v;
+  while (!(cin >> v) || cin.peek() != '\n') {
     cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    cout << q;
+    cin.ignore(LLONG_MAX, '\n');
+    cout << msg;
   };
+
+  return v;
 }
 
-void askString(string q, string *v) {
-  cout << q;
-  while (!(cin >> *v) || cin.peek() != '\n') {
+string askString(string msg) {
+  cout << msg;
+
+  string v;
+  while (!(cin >> v) || cin.peek() != '\n') {
     cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    cout << q;
+    cin.ignore(LLONG_MAX, '\n');
+    cout << msg;
   };
+  return v;
 }
 
 void run() {
   // размеры матрицы
   int w = 0, h = 0;
   while (w < 1)
-    askInt("input matrix width (a positive number): ", &w);
+    w = askInt("input matrix width (a positive number): ");
   while (h < 1)
-    askInt("input matrix height (a positive number): ", &h);
+    h = askInt("input matrix height (a positive number): ");
 
   // создаём матрицу
   // используется тип string вместо int или double
@@ -36,13 +42,13 @@ void run() {
   string **mat = new string *[h];
   for (int hi = 0; hi < h; hi++)
     mat[hi] = new string[w];
-  
-  cin.ignore(numeric_limits<streamsize>::max(), '\n');
-  
+
+  cin.ignore(LLONG_MAX, '\n');
+
   // наполняем матрицу
   for (int hi = 0; hi < h; hi++)
     for (int wi = 0; wi < w; wi++) {
-      printf_s("value at %d.%d: ", hi+1, wi+1);
+      printf_s("value at %d.%d: ", hi + 1, wi + 1);
       getline(cin, mat[hi][wi]);
     }
 

@@ -21,7 +21,7 @@ int fact(int n) {
 }
 
 double f(double x, int n) {
-  return pow(-1, n) * (2 * n * pow(x, 2 * n + 1) / fact(2 * n + 1));
+  return pow(-1, n) * ((2 * n * pow(x, 2 * n + 1)) / fact(2 * n + 1));
 }
 
 void run() {
@@ -42,11 +42,17 @@ void run() {
       curr = f(x, n);
       sum += curr;
 
-      printf("n: %d;\ta(n): %f\tsum: %f\te: %f\n", n, curr, sum,
-             abs(curr - prev));
+      if (n != 1 && abs(curr) > abs(prev)) {
+        cout << "numbers are no longer correctly represented by double, "
+                "exiting early\n";
+        return;
+      }
+
+      printf("n: %d\ta(n): %f\tsum: %f\teps: %f\n", n, curr, sum,
+             abs(prev - curr));
     }
   } else {
-    cout << "a is real; calculating until e < " << a << "\n";
+    cout << "a is real; calculating until eps < " << a << "\n";
     int n = 0;
     do {
       n += 1;
@@ -55,10 +61,16 @@ void run() {
       curr = f(x, n);
       sum += curr;
 
-      printf("n: %d;\ta(n): %f\tsum: %f\te: %f\n", n, curr, sum,
-             abs(curr - prev));
+      if (n != 1 && abs(curr) > abs(prev)) {
+        cout << "numbers are no longer correctly represented by double, "
+                "exiting early\n";
+        return;
+      }
 
-    } while (abs(curr - prev) > a);
+      printf("n: %d;\ta(n): %f\tsum: %f\teps: %f\n", n, curr, sum,
+             abs(prev - curr));
+
+    } while (abs(prev - curr) > a);
   }
 }
 

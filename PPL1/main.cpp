@@ -36,21 +36,19 @@ void run() {
   while (h < 1)
     h = askInt("input matrix height (a positive number): ");
 
-  // создаём матрицу
-  // используется тип string вместо int или double
-  // чтобы разрешить ввод конструкций типа "x + y"
-  string **mat = new string *[h];
+  double **mat = new double *[h];
   for (int hi = 0; hi < h; hi++)
-    mat[hi] = new string[w];
-
-  cin.ignore(LLONG_MAX, '\n');
+    mat[hi] = new double[w];
 
   // наполняем матрицу
   for (int hi = 0; hi < h; hi++)
-    for (int wi = 0; wi < w; wi++) {
-      printf_s("value at %d.%d: ", hi + 1, wi + 1);
-      getline(cin, mat[hi][wi]);
-    }
+    for (int wi = 0; wi < w; wi++)
+      while (!printf_s("value at %d.%d: ", hi + 1, wi + 1) ||
+             !(cin >> mat[hi][wi]) || cin.peek() != '\n') {
+        cout << "sorry, numbers only\n";
+        cin.clear();
+        cin.ignore(LLONG_MAX, '\n');
+      }
 
   // показываем изначальную матрицу
   cout << "\ninput matrix:\n  ";

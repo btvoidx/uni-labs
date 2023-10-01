@@ -49,7 +49,7 @@ void run() {
       }
 
       printf("n: %d\ta(n): %f\tsum: %f\teps: %f\n", n, curr, sum,
-             abs(prev - curr));
+             abs(curr - prev));
     }
   } else {
     cout << "a is real; calculating until eps < " << a << "\n";
@@ -68,9 +68,9 @@ void run() {
       }
 
       printf("n: %d;\ta(n): %f\tsum: %f\teps: %f\n", n, curr, sum,
-             abs(prev - curr));
+             abs(curr - prev));
 
-    } while (abs(prev - curr) > a);
+    } while (abs(curr - prev) > a);
   }
 }
 

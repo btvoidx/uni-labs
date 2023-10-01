@@ -32,7 +32,7 @@ void run() {
     a = askDouble("enter a (correctly): ");
   }
 
-  double prev, curr, sum;
+  double prev = 0, curr = 0, sum = 0;
 
   // если a целое
   if (floor(a) == a) {

@@ -13,8 +13,8 @@ double askDouble(string msg) {
   return v;
 }
 
-int fact(int n) {
-  for (int i = n - 1; i > 1; i--) {
+double fact(double n) {
+  for (double i = n - 1; i > 1; i--) {
     n *= i;
   }
   return n;
@@ -67,7 +67,7 @@ void run() {
         return;
       }
 
-      printf("n: %d;\ta(n): %f\tsum: %f\teps: %f\n", n, curr, sum,
+      printf("n: %d\ta(n): %f\tsum: %f\teps: %f\n", n, curr, sum,
              abs(curr - prev));
 
     } while (abs(curr - prev) > a);

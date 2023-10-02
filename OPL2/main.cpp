@@ -13,11 +13,12 @@ double askDouble(string msg) {
   return v;
 }
 
-double fact(double n) {
-  for (double i = n - 1; i > 1; i--) {
-    n *= i;
+double fact(int n) {
+  double f = 1;
+  for (int i = 2; i <= n; i++) {
+    f *= i;
   }
-  return n;
+  return f;
 }
 
 double f(double x, int n) {

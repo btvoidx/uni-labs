@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"path"
 	"strings"
 )
 
@@ -30,17 +31,32 @@ func askForFile() *os.File {
 	for {
 		fmt.Printf("введите путь к файлу: ")
 
-		path, err := r.ReadString('\n')
+		p, err := r.ReadString('\n')
 		if err != nil {
 			fmt.Printf("не удалось прочитать ввод: %v\n", err)
 			continue
 		}
 
-		path = strings.TrimSpace(path)
+		p = strings.TrimSpace(p)
 
-		f, err := os.Open(path)
+		if wd, err := os.Getwd(); err != nil {
+			p = path.Join(wd, p)
+		}
+
+		f, err := os.Open(p)
 		if err != nil {
-			fmt.Printf("не удалось открыть файл %s\n", path)
+			fmt.Printf("не удалось открыть файл %q\n", p)
+			continue
+		}
+
+		stat, err := f.Stat()
+		if err != nil {
+			fmt.Printf("не удалось открыть файл %q\n", p)
+			continue
+		}
+
+		if stat.IsDir() {
+			fmt.Printf("%q является директорией\n", p)
 			continue
 		}
 

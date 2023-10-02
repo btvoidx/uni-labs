@@ -14,12 +14,12 @@ type Point struct {
 }
 
 func run() {
-	p1, p2, p3 := readPoint(), readPoint(), readPoint()
+	p1, p2, p3 := askPoint(), askPoint(), askPoint()
 	area := math.Abs(p1.X*(p2.Y-p3.Y)+p2.X*(p3.Y-p1.Y)+p3.X*(p1.Y-p2.Y)) / 2
-	fmt.Printf("площадь треугольника: %.2f\n", area)
+	fmt.Printf("площадь треугольника: %.6f\n", area)
 }
 
-func readPoint() Point {
+func askPoint() Point {
 	r := bufio.NewReader(os.Stdin)
 
 	for {
@@ -36,19 +36,19 @@ func readPoint() Point {
 
 		snum1, snum2, ok := strings.Cut(s, " ")
 		if !ok {
-			fmt.Println("пробел не найден;")
+			fmt.Println("пробел не найден")
 			continue
 		}
 
 		num1, err := strconv.ParseFloat(snum1, 64)
 		if err != nil {
-			fmt.Println("неверное первое число;")
+			fmt.Println("неверное первое число")
 			continue
 		}
 
 		num2, err := strconv.ParseFloat(snum2, 64)
 		if err != nil {
-			fmt.Println("неверное второе число;")
+			fmt.Println("неверное второе число")
 			continue
 		}
 
@@ -66,7 +66,7 @@ func main() {
 		fmt.Print("снова? ('y'; любой иной ввод завершит программу): ")
 		s, err := r.ReadString('\n')
 		s = strings.TrimSpace(s)
-		if err != nil || !(s == "y" || s == "у") {
+		if err != nil || (s != "y" && s != "у") {
 			//                         это русская у
 			return
 		}

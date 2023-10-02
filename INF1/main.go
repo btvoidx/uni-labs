@@ -8,13 +8,13 @@ import (
 )
 
 func run() {
-	num := readInput()
+	num := askDynamicUint()
 	i := 0
 
 	for {
-		if i >= 10000 {
-			fmt.Printf("не удалось найти ответ за %d итераций; вероятно, его не найти; сворачиваемся", i)
-			os.Exit(1)
+		if i >= 100000 {
+			fmt.Printf("не удалось найти ответ за %d итераций; вероятно, его не найти; сворачиваемся\n", i)
+			return
 		}
 
 		fnum := num.Flip()
@@ -29,7 +29,7 @@ func run() {
 	fmt.Printf("понадобилось %d итераций чтобы получить %s\n", i, num)
 }
 
-func readInput() DynamicUint {
+func askDynamicUint() DynamicUint {
 	r := bufio.NewReader(os.Stdin)
 
 	for {

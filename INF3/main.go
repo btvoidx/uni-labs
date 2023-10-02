@@ -9,12 +9,12 @@ import (
 )
 
 func run() {
-	nums := readNumbers()
+	nums := askNumbers()
 	res := gcd(nums...)
 	fmt.Printf("наибольший общий делитель: %v\n", res)
 }
 
-func readNumbers() []int {
+func askNumbers() []int {
 	fmt.Print("введите целые положительные числа через пробел или в разных строках; ")
 	fmt.Print("0 завершает последовательность\n")
 
@@ -31,7 +31,7 @@ func readNumbers() []int {
 
 		line = strings.TrimSpace(line)
 
-		newNums, err := extractNumbers(line)
+		newNums, err := parseNumbers(line)
 		if err != nil {
 			fmt.Printf("ошибка парсинга: %s\n", err)
 			continue
@@ -57,7 +57,7 @@ func readNumbers() []int {
 	}
 }
 
-func extractNumbers(s string) ([]int, error) {
+func parseNumbers(s string) ([]int, error) {
 	words := strings.Split(s, " ")
 	nums := make([]int, 0, len(words))
 	for _, word := range words {

@@ -33,7 +33,6 @@ void run() {
     a = askDouble("enter a (correctly): ");
   }
 
-  // double prev = 0;
   double curr = 0, sum = 0;
   double rn = 0;
 
@@ -41,19 +40,11 @@ void run() {
   if (floor(a) == a) {
     cout << "a is whole; calculating first " << a << " elements:\n";
     for (int n = 1; n <= a; n++) {
-      // prev = curr;
       curr = f(x, n);
       sum += curr;
-      rn = abs(f(x, n+1) / sum);
+      rn = abs(f(x, n + 1) / sum);
 
-      // if (n != 1 && abs(curr) > abs(prev)) {
-      //   cout << "numbers are no longer correctly represented by double, "
-      //           "exiting early\n";
-      //   return;
-      // }
-
-      cout << "n: " << n << "\ta(n): " << curr << "\tsum: " << sum
-           << "\tr(n): " << rn << "\n";
+      printf_s("n: %e\ta(n): %e\tsum: %e\teps: %e\n", n, curr, sum, rn);
     }
   } else {
     cout << "a is real; calculating until eps < " << a << "\n";
@@ -61,19 +52,11 @@ void run() {
     do {
       n += 1;
 
-      // prev = curr;
       curr = f(x, n);
       sum += curr;
-      rn = abs(f(x, n+1) / sum);
+      rn = abs(f(x, n + 1) / sum);
 
-      // if (n != 1 && abs(curr) > abs(prev)) {
-      //   cout << "numbers are no longer correctly represented by double, "
-      //           "exiting early\n";
-      //   return;
-      // }
-
-      cout << "n: " << n << "\ta(n): " << curr << "\tsum: " << sum
-           << "\tr(n): " << rn << "\n";
+      printf_s("n: %e\ta(n): %e\tsum: %e\teps: %e\n", n, curr, sum, rn);
 
     } while (rn >= a);
   }

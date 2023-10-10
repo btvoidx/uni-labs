@@ -32,32 +32,20 @@ void run() {
     a = askDouble("enter a (correctly): ");
   }
 
+  bool aIsWhole = floor(a) == a;
+  if (aIsWhole)
+    cout << "a is whole; calculating first " << a << " elements:\n";
+  else
+    cout << "a is real; calculating until eps < " << a << "\n";
+
   double curr = 0, sum = 0;
   double rn = 0;
+  for (int n = 1; aIsWhole ? (n <= a) : (rn > a || rn == 0); n++) {
+    curr = f(x, n);
+    sum += curr;
+    rn = abs(f(x, n + 1) / sum);
 
-  // если a целое
-  if (floor(a) == a) {
-    cout << "a is whole; calculating first " << a << " elements:\n";
-    for (int n = 1; n <= a; n++) {
-      curr = f(x, n);
-      sum += curr;
-      rn = abs(f(x, n + 1) / sum);
-
-      printf_s("n: %d\ta(n): %g\tsum: %g\teps: %g\n", n, curr, sum, rn);
-    }
-  } else {
-    cout << "a is real; calculating until eps < " << a << "\n";
-    int n = 0;
-    do {
-      n += 1;
-
-      curr = f(x, n);
-      sum += curr;
-      rn = abs(f(x, n + 1) / sum);
-
-      printf_s("n: %d\ta(n): %g\tsum: %g\teps: %g\n", n, curr, sum, rn);
-
-    } while (rn >= a);
+    printf_s("n: %d\ta(n): %g\tsum: %g\teps: %g\n", n, curr, sum, rn);
   }
 }
 

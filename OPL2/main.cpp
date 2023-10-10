@@ -15,9 +15,8 @@ double askDouble(string msg) {
 
 double fact(int n) {
   double f = 1;
-  for (int i = 2; i <= n; i++) {
+  for (int i = 2; i <= n; i++)
     f *= i;
-  }
   return f;
 }
 
@@ -44,7 +43,7 @@ void run() {
       sum += curr;
       rn = abs(f(x, n + 1) / sum);
 
-      printf_s("n: %e\ta(n): %e\tsum: %e\teps: %e\n", n, curr, sum, rn);
+      printf_s("n: %d\ta(n): %g\tsum: %g\teps: %g\n", n, curr, sum, rn);
     }
   } else {
     cout << "a is real; calculating until eps < " << a << "\n";
@@ -56,7 +55,7 @@ void run() {
       sum += curr;
       rn = abs(f(x, n + 1) / sum);
 
-      printf_s("n: %e\ta(n): %e\tsum: %e\teps: %e\n", n, curr, sum, rn);
+      printf_s("n: %d\ta(n): %g\tsum: %g\teps: %g\n", n, curr, sum, rn);
 
     } while (rn >= a);
   }

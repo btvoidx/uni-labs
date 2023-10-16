@@ -1,7 +1,6 @@
 #include <iostream>
 #include <map>
 #include <math.h>
-#include <stdio.h>
 #include <vector>
 
 using namespace std;
@@ -71,8 +70,8 @@ void run() {
       cache.push_back(elem{curr, sum, rn});
     }
 
-    printf_s("cached: %s\tn: %d\ta(n): %g\tsum: %g\teps: %g\n",
-             cached ? "yes" : "no", n, curr, sum, rn);
+    printf_s("%s n: %d\ta(n): %g\tsum: %g\teps: %g\n",
+             cached ? " " : "+", n, curr, sum, rn);
   }
 
   // сохраняем обновлённый кэш.
@@ -80,22 +79,12 @@ void run() {
 }
 
 int main() {
-  cout << "this program calculates the scary formula given in the task\n";
+  cout << "this program calculates the scary formula given in the task "
+          "and caches the results to be reused\n"
+          "press Ctrl+C to exit\n";
 
-  string shouldRepeat;
-  do {
-    // настоящий "main" программы.
-    // он вынесен, чтобы отделить основную логику программы
-    // от вторичной логики перезапуска.
+  while (1)
     run();
-
-    // обычно тут спрашивает "again?", но не в этом случае,
-    // т.к это предполагает полный перезапуск, а тут программа
-    // сохраняет данные между подсчётами.
-    cout << "continue? (y / anything else quits): ";
-    cin >> shouldRepeat;
-    cout << "\n\n";
-  } while (shouldRepeat == "y" || shouldRepeat == "Y");
 
   return 0;
 }

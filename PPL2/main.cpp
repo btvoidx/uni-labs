@@ -48,9 +48,7 @@ void run() {
   else
     cout << "a is real; calculating until eps < " << a << "\n";
 
-  vector<elem> cache;
-  if (caches.count(x))
-    cache = caches[x];
+  auto cache = caches[x];
 
   double curr = 0, sum = 0;
   double rn = 0;
@@ -70,8 +68,8 @@ void run() {
       cache.push_back(elem{curr, sum, rn});
     }
 
-    printf_s("%s n: %d\ta(n): %g\tsum: %g\teps: %g\n",
-             cached ? " " : "+", n, curr, sum, rn);
+    printf_s("%s n: %d\ta(n): %g\tsum: %g\teps: %g\n", cached ? " " : "+", n,
+             curr, sum, rn);
   }
 
   // сохраняем обновлённый кэш.

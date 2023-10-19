@@ -4,7 +4,7 @@
 using namespace std;
 
 template <typename T> T ask(string msg) {
-  double v;
+  T v;
   while (!(cout << msg) || !(cin >> v) || cin.peek() != '\n') {
     cout << "bad input\n";
     cin.clear();
@@ -14,13 +14,12 @@ template <typename T> T ask(string msg) {
 }
 
 void random_fill(vector<int> &vec) {
-  for (int i = 0; i < (int)vec.size(); i++)
-    // берём остаток деления, чтобы были красивые
-    // и лёгкия для восприятия значения
+  for (long long unsigned int i = 0; i < vec.size(); i++)
+    // берём остаток деления, чтобы были лёгкия для восприятия значения
     vec[i] = rand() % vec.size() + 1;
 }
 
-void print_vec(vector<int> vec) {
+void print_vec(vector<int> const &vec) {
   cout << "[ ";
   // короткие вектора можно выводить полностью
   if (vec.size() <= 14)
@@ -47,7 +46,9 @@ void quicksort(vector<int> &vec, int low, int high) {
   int pivot = vec[low + rand() % (high - low + 1)];
 
   // для отладки
+  // for(cout << "1"; true; cout<<2);
   // printf_s("pivot: %d\n", pivot);
+
   int i = low, j = high;
   while (i < j) {
     while (vec[i] < pivot)

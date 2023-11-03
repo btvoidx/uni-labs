@@ -29,7 +29,9 @@ void solution() {
   char character;
   bool reading_number = false;
   while (in >> character) {
-    if (is_digit(character) || (reading_number && character == '.')) {
+    if (is_digit(character) ||
+        (character == '-' && is_digit(in.peek()) && !reading_number) ||
+        (character == '.' && reading_number)) {
       reading_number = true;
       nums << character;
       continue;

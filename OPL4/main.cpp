@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -46,6 +47,39 @@ void solution() {
   }
 
   cout << "done\n";
+}
+
+void solution_vec() {
+  ifstream in("./in.txt");
+  ofstream out("./out.txt");
+
+  // выключает пропуск пробелов
+  in.unsetf(ios_base::skipws);
+
+  if (!in.is_open()) {
+    cout << "failed to open ./in.txt; exiting\n";
+    return;
+  }
+  if (!out.is_open()) {
+    cout << "failed to open ./out.txt; exiting\n";
+    return;
+  }
+
+  char character;
+  vector<int> nums(1);
+  while (in.good()) {
+    if (in >> nums[nums.size() - 1])
+      nums.push_back(0);
+    else {
+      in.clear();
+      in >> character;
+      out << character;
+    }
+  }
+
+  cout << "done\nnumbers: ";
+  for (const auto v : nums)
+    cout << v << " ";
 }
 
 int main() {

@@ -1,4 +1,3 @@
-
 /*
 # Задание
 Реализовать консольное приложение, предназначенное для работы с массивом
@@ -114,7 +113,7 @@ void solution(istream &in, ostream &out) {
 }
 
 int main() {
-  cout << ""
+  cout << "this program reads measurements and outputs them in km/h and m/s"
           "press Ctrl+C to exit\n";
 
   while (true) {

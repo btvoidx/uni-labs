@@ -1,8 +1,9 @@
 2
+
 Max Tumozov
 2
 1 60 km/h
-2 10000 m/s
+2 1 m/s
 
 John Doe
 2

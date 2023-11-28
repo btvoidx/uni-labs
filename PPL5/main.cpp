@@ -192,7 +192,7 @@ int main() {
             "[3] in.txt/cout\n"
             "[4] in.txt/out.txt\n"
             "> ";
-    if (!(cin >> choice)) {
+    if (!(cin >> choice) || cin.peek() != '\n') {
       cin.clear();
       cin.ignore(LLONG_MAX, '\n');
       cout << "quit meddling around\n> ";
@@ -202,7 +202,10 @@ int main() {
     switch (choice) {
     case 1: {
       solution(cin, cout);
+      cin.clear();
+      cin.ignore(LLONG_MAX, '\n');
     } break;
+      
     case 2: {
       ofstream out("out.txt");
       if (!out.is_open()) {
@@ -212,7 +215,10 @@ int main() {
 
       cout << "have fun typing it out by hand!\n";
       solution(cin, out);
+      cin.clear();
+      cin.ignore(LLONG_MAX, '\n');
     } break;
+      
     case 3: {
       ifstream in("in.txt");
       if (!in.is_open()) {
@@ -222,6 +228,7 @@ int main() {
 
       solution(in, cout);
     } break;
+      
     case 4: {
       ifstream in("in.txt");
       ofstream out("out.txt");
@@ -232,6 +239,7 @@ int main() {
 
       solution(in, out);
     } break;
+      
     default:
       cout << "unknown input\n";
     }

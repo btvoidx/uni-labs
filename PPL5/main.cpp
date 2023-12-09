@@ -62,8 +62,14 @@ public:
 };
 
 istream &operator>>(istream &in, measurement &ms) {
-  in >> ms.id;
-  in >> ms.speed;
+  // предотвращает "0.6 km/h" как корректный ввод
+  if (!(in >> ms.id) || in.peek() == '.') {
+    in.setstate(istream::badbit);
+    return in;
+  }
+
+  if (!(in >> ms.speed))
+    return in;
 
   string unit;
   if (!(in >> unit))
@@ -159,6 +165,8 @@ ostream &operator<<(ostream &out, const racer &r) {
 };
 
 void solution(istream &in, ostream &out) {
+  cout << "legend:\n[racer count] ([name] [lap count] ([id] [speed] [m/s|km/h] "
+          "...) ...)\n\n";
   cout << "reading!\n";
 
   int size = 0;
@@ -205,7 +213,7 @@ int main() {
       cin.clear();
       cin.ignore(LLONG_MAX, '\n');
     } break;
-      
+
     case 2: {
       ofstream out("out.txt");
       if (!out.is_open()) {
@@ -218,7 +226,7 @@ int main() {
       cin.clear();
       cin.ignore(LLONG_MAX, '\n');
     } break;
-      
+
     case 3: {
       ifstream in("in.txt");
       if (!in.is_open()) {
@@ -228,7 +236,7 @@ int main() {
 
       solution(in, cout);
     } break;
-      
+
     case 4: {
       ifstream in("in.txt");
       ofstream out("out.txt");
@@ -239,7 +247,7 @@ int main() {
 
       solution(in, out);
     } break;
-      
+
     default:
       cout << "unknown input\n";
     }

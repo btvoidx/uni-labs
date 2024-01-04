@@ -41,19 +41,6 @@ public:
     this->kmph = kmph;
   }
 
-  measurement(const measurement &rhs) {
-    this->id = rhs.id;
-    this->speed = rhs.speed;
-    this->kmph = rhs.kmph;
-  }
-
-  const measurement &operator=(const measurement &rhs) {
-    this->id = rhs.id;
-    this->speed = rhs.speed;
-    this->kmph = rhs.kmph;
-    return *this;
-  };
-
   measurement in_kmph() const;
   measurement in_mps() const;
 
@@ -110,8 +97,6 @@ public:
   racer(string full_name, vector<measurement> laps)
       : full_name(full_name), laps(laps) {}
 
-  racer(const racer &rhs) : full_name(rhs.full_name), laps(rhs.laps) {}
-
   measurement best_lap() const;
 
   friend istream &operator>>(istream &, measurement &);
@@ -132,7 +117,8 @@ measurement racer::best_lap() const {
 }
 
 istream &operator>>(istream &in, racer &r) {
-  r.full_name = "";
+  if (!(in >> r.full_name))
+    return in;
 
   int lap_count;
   while (!(in >> lap_count)) {
@@ -170,7 +156,7 @@ void solution(istream &in, ostream &out) {
   cout << "reading!\n";
 
   int size = 0;
-  if (!(in >> size) || size <= 0) {
+  if (!(in >> size) || size <= 0 || !isspace(cin.peek())) {
     cout << "size read failed; aborting\n";
     return;
   }

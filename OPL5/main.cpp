@@ -37,14 +37,6 @@ public:
     this->kmph = kmph;
   }
 
-  measurement(const measurement &rhs) {
-    this->id = rhs.id;
-    this->speed = rhs.speed;
-    this->kmph = rhs.kmph;
-  }
-
-  measurement &operator=(const measurement &rhs) { return *this; };
-
   int id;
   double speed;
   bool kmph;
@@ -128,7 +120,7 @@ void solution(istream &in, ostream &out) {
 }
 
 int main() {
-  cout << "this program reads measurements and outputs them in km/h and m/s"
+  cout << "this program reads measurements and outputs them in km/h and m/s\n"
           "press Ctrl+C to exit\n";
 
   while (true) {
